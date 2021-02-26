@@ -16,11 +16,15 @@
       method="post"
       enctype="multipart/form-data"
     >
-      <input type="file" name="sampleFile" />
-      <input type="file" name="my_profile_pic" />
-      <input type="file" name="my_pet" />
-      <input type="file" name="my_cover_photo" />
-      <input type="submit" value="Upload!" />
+      <input type="file" name="sampleFile" id="sampleFile" />
+      <input type="file" name="my_profile_pic" id="profilePic" />
+      <input type="file" name="my_pet" id="myPet" />
+
+      <br />
+      <label for="userName">userName:</label>
+      <input type="text" name="userName" id="userName" />
+      <br />
+      <input type="submit" value="Upload!" id="upload" />
     </form>
   </body>
 </html>

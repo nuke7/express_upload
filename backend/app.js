@@ -3,8 +3,8 @@ const fileUpload = require("express-fileupload");
 const app = express();
 
 const PORT = 8050;
-app.use("/form", express.static(__dirname + "/frontend/index.html"));
-app.use("/pub", express.static(__dirname + "/frontend/public"));
+app.use("/form", express.static(__dirname + "/../frontend/index.html"));
+app.use("/pub", express.static(__dirname + "/../frontend/public"));
 
 // default options
 app.use(fileUpload());
