@@ -12,12 +12,12 @@ function _loaded() {
       document.getElementById("sampleFile").files[0],
       "sampleFile.jpg"
     );
-    fd.append(
+    /*  fd.append(
       "profilePic",
       document.getElementById("profilePic").files[0],
       "profilePic.jpg"
     );
-    fd.append("myPet", document.getElementById("myPet").files[0], "myPet.jpg");
+    fd.append("myPet", document.getElementById("myPet").files[0], "myPet.jpg"); */
 
     for (let [name, value] of fd) {
       console.log(`${name} : ${value}`);
@@ -26,6 +26,10 @@ function _loaded() {
 
     fetch("http://localhost:8050/upload", {
       method: "POST",
+      mode: "cors",
+      /* headers: {
+        "content-type": "multipart/formdata",
+      }, */
       body: fd,
     });
   });
