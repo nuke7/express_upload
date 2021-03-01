@@ -6,11 +6,11 @@ function _loaded() {
   document.querySelector("#uploadForm").addEventListener("submit", (e) => {
     e.preventDefault();
     console.log("We blocked the file upload");
-    fd.append("username", document.getElementById("userName").value);
+    fd.append("filename", document.getElementById("userName").value);
     fd.append(
       "sampleFile",
-      document.getElementById("sampleFile").files[0],
-      "sampleFile.jpg"
+      document.getElementById("sampleFile").files[0]
+      /* `${document.getElementById("userName").value}.jpg` */
     );
     /*  fd.append(
       "profilePic",
@@ -27,11 +27,27 @@ function _loaded() {
     fetch("http://localhost:8050/upload", {
       method: "POST",
       mode: "cors",
-      /* headers: {
-        "content-type": "multipart/formdata",
+      /*   headers: {
+        "Content-Type": "multipart/form-data",
       }, */
       body: fd,
-    });
+    })
+      /* .then(
+        fetch(
+          `http://localhost:8050/download?query=${
+            document.getElementById("userName").value
+          }`
+        ),
+        {
+          method: "GET",
+          mode: "cors",
+          body: `${document.getElementById("userName").value}.jpg`,
+        }
+      ) */
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => (document.getElementById("image").src = `${data.link}`));
   });
 }
 window.addEventListener("load", _loaded);

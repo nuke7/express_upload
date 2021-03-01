@@ -9,22 +9,19 @@
   </head>
 
   <body>
-    <form
-      ref="uploadForm"
-      id="uploadForm"
-      action="http://localhost:8050/form"
-      method="post"
-      enctype="multipart/form-data"
-    >
+    <form id="uploadForm">
       <input type="file" name="sampleFile" id="sampleFile" />
-      <input type="file" name="my_profile_pic" id="profilePic" />
-      <input type="file" name="my_pet" id="myPet" />
+      <!-- <input type="file" name="my_profile_pic" id="profilePic" />
+      <input type="file" name="my_pet" id="myPet" /> -->
 
       <br />
-      <label for="userName">userName:</label>
+      <label for="userName">fileName:</label>
       <input type="text" name="userName" id="userName" />
       <br />
       <input type="submit" value="Upload!" id="upload" />
     </form>
+    <div id="pictureWrapper">
+      <img id="image" src="" alt="" />
+    </div>
   </body>
 </html>

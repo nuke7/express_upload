@@ -8,6 +8,7 @@ const app = express();
 const PORT = 8050;
 app.use("/form", express.static(__dirname + "/../frontend/index.html"));
 app.use("/pub", express.static(__dirname + "/../frontend/public"));
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 // default options
 app.use(fileUpload());
@@ -29,7 +30,7 @@ app.post("/upload", function (req, res) {
 
   return req.pipe(busboy);
  */
-  console.log(req.body);
+  console.log(req.body.filename);
 
   if (!req.files || Object.keys(req.files).length === 0) {
     res.status(400).send("No files were uploaded.");
@@ -38,17 +39,25 @@ app.post("/upload", function (req, res) {
 
   console.log("req.files >>>", req.files); // eslint-disable-line
 
-  sampleFile = req.files.sampleFile;
+  let sampleFile = req.files.sampleFile;
+  let filename = req.body.filename + ".jpg";
 
-  uploadPath = __dirname + "/uploads/" + sampleFile.name;
+  uploadPath = __dirname + "/uploads/" + filename;
 
   sampleFile.mv(uploadPath, function (err) {
     if (err) {
       return res.status(500).send(err);
     }
 
-    res.send("File uploaded to " + uploadPath);
+    /* res.send("File uploaded to " + uploadPath); */
+    res.json({ link: `http://localhost:8050/uploads/${filename}` });
   });
+});
+
+app.get("/download", function (req, res) {
+  console.log(req.query);
+  /* res.sendFile(__dirname + "/uploads/" + req.query.query + ".jpg"); */
+  res.json({ link: `http://localhost:8050/uploads/${req.query.query}.jpg` });
 });
 
 app.listen(PORT, function () {
