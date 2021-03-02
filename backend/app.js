@@ -4,14 +4,16 @@ const Busboy = require("busboy");
 const path = require("path");
 const fs = require("fs");
 const app = express();
+const cors = require("cors");
 
 const PORT = 8050;
-app.use("/form", express.static(__dirname + "/../frontend/index.html"));
-app.use("/pub", express.static(__dirname + "/../frontend/public"));
+app.use("/form", express.static(__dirname + "/../frontend2/index.html"));
+app.use("/pub", express.static(__dirname + "/../frontend2/public"));
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
 // default options
 app.use(fileUpload());
+app.use(cors());
 
 app.get("/ping", function (req, res) {
   res.send("pong");

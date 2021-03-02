@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+input {
+  margin-top: 2rem;
+  border-radius: 5px;
+  padding: 5px;
+}
