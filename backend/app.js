@@ -11,27 +11,25 @@ app.use("/form", express.static(__dirname + "/../frontend2/index.html"));
 app.use("/pub", express.static(__dirname + "/../frontend2/public"));
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
+let userData;
+
 // default options
 app.use(fileUpload());
 app.use(cors());
+
+fs.readFile("./uploads/data.json", "utf8", (err, data) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  userData = JSON.parse(data);
+});
 
 app.get("/ping", function (req, res) {
   res.send("pong");
 });
 
 app.post("/upload", function (req, res) {
-  /*   let busboy = new Busboy({ headers: req.headers });
-  busboy.on("file", function (fieldname, file, filename, encoding, mimetype) {
-    let saveTo = path.join(__dirname, "uploads/" + filename);
-    file.pipe(fs.createWriteStream(saveTo));
-  });
-  busboy.on("finish", function () {
-    res.writeHead(200, { Connection: "close" });
-    res.end("That's all folks!");
-  });
-
-  return req.pipe(busboy);
- */
   console.log(req.body.filename);
 
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -43,8 +41,13 @@ app.post("/upload", function (req, res) {
 
   let sampleFile = req.files.sampleFile;
   let filename = req.body.filename + ".jpg";
+  userData.push(JSON.parse(req.body.userData));
 
   uploadPath = __dirname + "/uploads/" + filename;
+
+  fs.writeFile("./uploads/data.json", JSON.stringify(userData), function (err) {
+    if (err) throw err;
+  });
 
   sampleFile.mv(uploadPath, function (err) {
     if (err) {
