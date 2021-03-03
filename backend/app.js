@@ -30,7 +30,7 @@ app.get("/ping", function (req, res) {
 });
 
 app.post("/upload", function (req, res) {
-  console.log(req.body.filename);
+  console.log(req.body);
 
   if (!req.files || Object.keys(req.files).length === 0) {
     res.status(400).send("No files were uploaded.");

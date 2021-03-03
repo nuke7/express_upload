@@ -2,8 +2,6 @@ import "./App.css";
 import { useEffect, useState } from "react";
 
 let fd = new FormData();
-const elementList = document.querySelectorAll(".userData");
-
 function App() {
   const [upload, setUpload] = useState(false);
   let data = {};
@@ -21,13 +19,15 @@ function App() {
         .then((response) => {
           return response.json();
         })
-        .then((data) => (document.getElementById("image").src = `${data.link}`))
+        .then((resp) => (document.getElementById("image").src = `${resp.link}`))
         .then(setUpload(false))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         .then((fd = new FormData()));
     }
   }, [upload]);
 
   const uploadFunc = () => {
+    const elementList = document.querySelectorAll(".userData");
     fd.append("filename", document.getElementById("userName").value);
     fd.append("sampleFile", document.getElementById("sampleFile").files[0]);
     for (let elem of elementList) {
