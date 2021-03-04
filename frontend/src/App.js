@@ -44,29 +44,92 @@ function App() {
 
   return (
     <div className="App">
-      <div className="wrapper">
-        <input type="file" name="sampleFile" id="sampleFile" />
-        <br />
-        <label htmlFor="userName">fileName:</label>
-        <input type="text" name="userName" id="userName" />
-        <br />
-        <h4>User Location Data</h4>
-        <label htmlFor="name">Full Name:</label>
-        <input className="userData" type="text" name="name" id="name" />
-        <label htmlFor="email">Email:</label>
-        <input className="userData" type="email" name="email" id="email" />
-        <label htmlFor="zip">ZipCode:</label>
-        <input className="userData" type="number" name="zip" id="zip" />
-        <label htmlFor="city">City:</label>
-        <input className="userData" type="text" name="city" id="city" />
-        <label htmlFor="address">Address:</label>
-        <input className="userData" type="text" name="address" id="address" />
-        <br />
-        <button type="button" value="Upload!" id="upload" onClick={() => uploadFunc()}>
-          Upload
-        </button>
-        <div id="pictureWrapper">
-          <img style={{ width: "90%", marginTop: "1rem" }} id="image" src="" alt="" />
+      <div className="inner">
+        <div className="wrapper">
+          <h3>Contact Us</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore.
+          </p>
+          <input type="file" name="sampleFile" id="sampleFile" />
+          <div className="form-group">
+            <input
+              className="form-control"
+              type="text"
+              name="userName"
+              id="userName"
+              required
+            />
+            <span>fileName:</span>
+            <span className="border"></span>
+          </div>
+          <h3>User Location Data</h3>
+          <div className="form-group">
+            <input
+              className="userData form-control"
+              type="text"
+              name="name"
+              id="name"
+              required
+            />
+            <span>Full Name:</span>
+            <span className="border"></span>
+          </div>
+          <div className="form-group">
+            <input
+              className="userData form-control"
+              type="email"
+              name="email"
+              id="email"
+              required
+            />
+            <span>Email:</span>
+            <span className="border"></span>
+          </div>
+          <div className="form-group">
+            <input
+              className="userData form-control"
+              type="number"
+              name="zip"
+              id="zip"
+              required
+            />
+            <span>ZipCode:</span>
+            <span className="border"></span>
+          </div>
+          <div className="form-group">
+            <input
+              className="userData form-control"
+              required
+              type="text"
+              name="city"
+              id="city"
+            />
+            <span>City:</span>
+            <span className="border"></span>
+          </div>
+          <div className="form-group">
+            <input
+              className="userData form-control"
+              required
+              type="text"
+              name="address"
+              id="address"
+            />
+            <span>Address:</span>
+            <span className="border"></span>
+          </div>
+          <button type="button" value="Upload!" id="upload" onClick={() => uploadFunc()}>
+            Upload
+          </button>
+          <div id="pictureWrapper">
+            <img
+              style={{ width: "90%", margin: "1rem auto", display: "block" }}
+              id="image"
+              src=""
+              alt=""
+            />
+          </div>
         </div>
       </div>
     </div>

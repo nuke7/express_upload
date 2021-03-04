@@ -12,6 +12,8 @@ app.use("/pub", express.static(__dirname + "/../frontend2/public"));
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
 let userData;
+let userFileName;
+let newData;
 
 // default options
 app.use(fileUpload());
@@ -29,6 +31,7 @@ app.get("/ping", function (req, res) {
   res.send("pong");
 });
 
+//! upload kezelés
 app.post("/upload", function (req, res) {
   console.log(req.body);
 
@@ -37,15 +40,31 @@ app.post("/upload", function (req, res) {
     return;
   }
 
+  newData = req.body.userData;
+
   console.log("req.files >>>", req.files); // eslint-disable-line
 
   let sampleFile = req.files.sampleFile;
   let filename = req.body.filename + ".jpg";
   userData.push(JSON.parse(req.body.userData));
+  //json adat parse
+  //select mail key
+  //remove extra characters, string replace
+  //file name, file path
+  //add .json extension
+  // writeFile
+
+  userFileName = JSON.parse(req.body.userData).email.replace(/[^a-z0-9]/gi, "_");
+
+  console.log(userFileName);
 
   uploadPath = __dirname + "/uploads/" + filename;
 
   fs.writeFile("./uploads/data.json", JSON.stringify(userData), function (err) {
+    if (err) throw err;
+  });
+
+  fs.writeFile(`./uploads/${userFileName}.json`, newData, function (err) {
     if (err) throw err;
   });
 
